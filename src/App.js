@@ -1,20 +1,25 @@
 import React from "react";
+import Home from "./components/HomePage/HomePageComponent";
 import DefaultHOC from "./HOC/DefaultHOC";
+import axios from "axios";
 
-function Home() {
-  return <h1>Home Page</h1>;
-}
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-function Contact() {
-  return <h1>Contact Page</h1>;
-}
+
+import MoviePage from "./components/HomePage/MoviePage";
+
+
+axios.defaults.baseURL = "https://api.themoviedb.org/3";
+axios.defaults.params = {};
+axios.defaults.params['api_key'] = process.env.REACT_APP_API_KEY;
 
 
 function App() {
   return (
     <>
       <DefaultHOC path="/" exact component={Home} />
-      <DefaultHOC path="/contact" exact component={Contact} />
+      <DefaultHOC path="/Movie/:id" exact component={MoviePage} />
     </>
   );
 }
