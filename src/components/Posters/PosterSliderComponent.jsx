@@ -4,34 +4,28 @@ import Poster from "./PosterComponent";
 
 const PosterSlider = (props) => {
 
-    
-    console.log(props.path);
-
     const settings = {
         infinite: true,
-        autoplay: false,
-        slidesToShow: 6,
-        slidesToScroll: 6,
+        autoplay: true,
+        mobileFirst: true,
         InitialSlide: 0,
         responsive: [
             {
-                breakpoints: 1024,
+                breakpoint: 1920,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 5,
                     slidesToScroll: 2,
-                    infinite: true,
                 },
             },
             {
-                breakpoints: 600,
+                breakpoint: 600,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    InitialSlide: 1,
                 },
             },
             {
-                breakpoints: 480,
+                breakpoint: 480,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
@@ -40,18 +34,23 @@ const PosterSlider = (props) => {
         ],
     };
 
+    const {isDark, poster_path, title, config} = props;
+    
+    const currentSettings = config ? config : settings;
+
     return (
         <>
-            <div className="flex flex-col items-start w-full my-2">
-                <h3 className={`text-2xl font-bold ${props.isDark} ? text-white : text-gray-700}`}>Recommended Movies</h3>
-                <p className="text-sm text-gray-800">
-                    List of recommended movies
+            <div className="px-10 flex flex-col items-start w-full my-2">
+                <h3 className={`text-2xl font-bold ${props.isDark ? "text-white" : "text-gray-700"}`}>{props.title}</h3>
+                <p className={`text-sm ${props.isDark ? "text-white" : "text-gray-700"}`}>
+                    List of {props.title} movies
                 </p>
             </div>
-            <Slider {...settings}>
+            <Slider {...currentSettings} className="w-11/12 m-auto">
                 {   props.path.map((image) => (
                     <Poster src={`https://image.tmdb.org/t/p/original/${image.poster_path}`}
-                        title={`${image.title}`} />
+                        title={`${image.title}`}
+                        id={`${image.id}`} />
                 ))}
                 
             </Slider>

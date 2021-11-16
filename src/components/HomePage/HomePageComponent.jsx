@@ -24,7 +24,7 @@ function Home() {
   useEffect(() => {
     const reqPremMov = async () =>{
       const getPemMov = await axios.get("/movie/top_rated");
-      setRecMov(getPemMov.data.results);
+      setPremMov(getPemMov.data.results);
     }
 
     reqPremMov();
@@ -33,18 +33,18 @@ function Home() {
   useEffect(() => {
     const reqUpcMov = async () =>{
       const getUpcMov = await axios.get("/movie/upcoming");
-      setRecMov(getUpcMov.data.results);
+      setOnlStm(getUpcMov.data.results);
     }
 
     reqUpcMov();
   },[]);
 
+  console.log(premiereMovie);
   
 
     return ( 
     <>
-      
-      <NavBar></NavBar>
+
       <HeroCarousel />
 
       <div className=" mx-auto px-0 md:px-4 my-8">
@@ -54,11 +54,23 @@ function Home() {
           <EntertainmentCardSlider />
       </div>
 
-      <div className="bg-samuel-600 py-5 mx-auto px-0 md:px-4 my-8 md:w-full md:mx-auto">
-                <PosterSlider isDark={false}
+      <div className="bg-samuel-600 py-5 mx-auto px-0 md:px-4 md:w-full md:mx-auto">
+                <PosterSlider isDark={true}
+                title = "Recommended"
                 path={recomendedMovies} />
       </div>
+      
+      <div className="py-5 mx-auto px-0 md:px-4 md:w-full md:mx-auto">
+                <PosterSlider isDark={false}
+                title = "Top Rated"
+                path={premiereMovie} />
+      </div>
 
+      <div className="bg-samuel-600 py-5 mx-auto px-0 md:px-4 md:w-full md:mx-auto">
+                <PosterSlider isDark={false}
+                title = "Comming Soon"
+                path={onlineStream} />
+      </div>
     </>);
   }
 

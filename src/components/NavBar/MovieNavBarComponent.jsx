@@ -1,25 +1,31 @@
-import React from "react";
-import {BiChevronDown, BiMenu, BiSearch} from "react-icons/bi";
+import React, {useContext} from "react";
+import {BiChevronDown, BiMenu, BiSearch, BiShareAlt} from "react-icons/bi";
 
+
+import {MovieContext} from '../../Context/MovieContext';
 
 function NavSm() {
+
+    const {movie} = useContext(MovieContext);
+
     return <>
-        <div className="text-samuel-400 flex items-center justify-between shadow-sm py-2 px-3">
+        <div className="text-samuel-400 flex items-center border-b-2 justify-between shadow-sm py-2 px-3">
             <div className="">
-                <h3 className="text-xl font-bold">Fast and Furious 9</h3>
+                <h3 className="text-xl font-bold">{movie.original_title}</h3>
             </div>
             <div className="w-8 h-8">
-                <BiSearch className="w-full h-full"></BiSearch>
+                <BiShareAlt className="w-full h-full"></BiShareAlt>
             </div>
         </div>
     </>
 }
 
 function NavMd() {
+    const {movie} = useContext(MovieContext);
     return <>
         <div className="text-samuel-400 flex items-center justify-between shadow-sm py-3 px-3">
             <div className="">
-                <h3 className="text-xl font-bold">Fast and Furious 9</h3>
+                <h3 className="text-xl font-bold">{movie.original_title}</h3>
             </div>
             <div className="w-8 h-8">
                 <BiMenu className="w-full h-full"></BiMenu>
